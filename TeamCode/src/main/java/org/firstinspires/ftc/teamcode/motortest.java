@@ -36,9 +36,10 @@ public class motortest extends LinearOpMode {
             // Button B → set reverse
             if (gamepad1.b) {
                 motor1.setDirection(DcMotorSimple.Direction.REVERSE);
+            }
+            if (gamepad1.y) {
                 motor2.setDirection(DcMotorSimple.Direction.REVERSE);
             }
-
             // Debug info
             telemetry.addData("Joystick Power", power);
             telemetry.addData("Motor1 Dir", motor1.getDirection());

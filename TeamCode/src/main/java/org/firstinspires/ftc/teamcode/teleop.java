@@ -1,12 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -17,15 +17,18 @@ public class teleop extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         // Declare our motors
         // Make sure your ID's match your configuration
-        DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
-        DcMotor backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
-        DcMotor frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
-        DcMotor backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
+        DcMotor frontLeftMotor = hardwareMap.dcMotor.get("leftFront");
+        DcMotor backLeftMotor = hardwareMap.dcMotor.get("leftBack");
+        DcMotor frontRightMotor = hardwareMap.dcMotor.get("rightFront");
+        DcMotor backRightMotor = hardwareMap.dcMotor.get("rightBack");
 
         //motors to toggle with
-        DcMotorEx intake = hardwareMap.get(DcMotorEx.class, "i");
-        DcMotorEx shooterLeft = hardwareMap.get(DcMotorEx.class, "sl");
-        DcMotorEx shooterRight = hardwareMap.get(DcMotorEx.class, "sr");
+        DcMotor intake = hardwareMap.get(DcMotor.class, "i");
+        DcMotor shooterLeft = hardwareMap.get(DcMotor.class, "sl");
+        DcMotor shooterRight = hardwareMap.get(DcMotor.class, "sr");
+
+        //servos
+        Servo servoKickers = hardwareMap.get(Servo.class, "sk");
 
         double power = 0;
         int selectedMotor = 0;
@@ -37,8 +40,8 @@ public class teleop extends LinearOpMode {
         // If your robot moves backwards when commanded to go forwards,
         // reverse the left side instead.
         // See the note about this earlier on this page.
-        frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
+        backRightMotor.setDirection(DcMotor.Direction.REVERSE);
 
         // Retrieve the IMU from the hardware map
         IMU imu = hardwareMap.get(IMU.class, "imu");

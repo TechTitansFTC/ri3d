@@ -23,9 +23,9 @@ public class teleop extends LinearOpMode {
         DcMotor backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
 
         //motors to toggle with
-        DcMotorEx intake = hardwareMap.get(DcMotorEx.class, "intake");
-        DcMotorEx indexer = hardwareMap.get(DcMotorEx.class, "indexer");
-        DcMotorEx shooter = hardwareMap.get(DcMotorEx.class, "shooter");
+        DcMotorEx intake = hardwareMap.get(DcMotorEx.class, "i");
+        DcMotorEx shooterLeft = hardwareMap.get(DcMotorEx.class, "sl");
+        DcMotorEx shooterRight = hardwareMap.get(DcMotorEx.class, "sr");
 
         double power = 0;
         int selectedMotor = 0;
@@ -63,9 +63,6 @@ public class teleop extends LinearOpMode {
             }
             yPressedLast = gamepad1.y;
 
-
-            DcMotorEx currentMotor = (selectedMotor == 0) ? intake :
-                    (selectedMotor == 1) ? indexer : shooter;
 
             if (gamepad1.a) {
                 intake.setPower(power);

@@ -14,10 +14,10 @@ public class teleop extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         // Drivetrain motors
-        DcMotor frontLeftMotor  = hardwareMap.dcMotor.get("leftFront");
+     /*   DcMotor frontLeftMotor  = hardwareMap.dcMotor.get("leftFront");
         DcMotor backLeftMotor   = hardwareMap.dcMotor.get("leftBack");
         DcMotor frontRightMotor = hardwareMap.dcMotor.get("rightFront");
-        DcMotor backRightMotor  = hardwareMap.dcMotor.get("rightBack");
+        DcMotor backRightMotor  = hardwareMap.dcMotor.get("rightBack");*/
 
         // Mechanism motors
         DcMotor intake       = hardwareMap.get(DcMotor.class, "int");
@@ -28,8 +28,8 @@ public class teleop extends LinearOpMode {
         Servo servoKickers   = hardwareMap.get(Servo.class, "sk");
 
         // Reverse right side for standard mecanum
-        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
-        backRightMotor.setDirection(DcMotor.Direction.REVERSE);
+//        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
+//        backRightMotor.setDirection(DcMotor.Direction.REVERSE);
 
         // IMU init (field-centric drive)
         IMU imu = hardwareMap.get(IMU.class, "imu");
@@ -62,10 +62,11 @@ public class teleop extends LinearOpMode {
             double frontRightPower = (rotY - rotX - rx) / denominator * speedFactor;
             double backRightPower  = (rotY + rotX - rx) / denominator * speedFactor;
 
-            frontLeftMotor.setPower(frontLeftPower);
-            backLeftMotor.setPower(backLeftPower);
-            frontRightMotor.setPower(frontRightPower);
-            backRightMotor.setPower(backRightPower);
+
+//            frontLeftMotor.setPower(frontLeftPower);
+//            backLeftMotor.setPower(backLeftPower);
+//            frontRightMotor.setPower(frontRightPower);
+//            backRightMotor.setPower(backRightPower);
 
             if (gamepad1.right_trigger > 0.1) {
                 intake.setPower(1.0);                 // intake in
@@ -86,7 +87,7 @@ public class teleop extends LinearOpMode {
             if (gamepad1.a) {
                 servoKickers.setPosition(0.7);
             } else {
-                servoKickers.setPosition(0.3);        
+                servoKickers.setPosition(0.3);
             }
 
             telemetry.addData("Drive Speed Factor", speedFactor);

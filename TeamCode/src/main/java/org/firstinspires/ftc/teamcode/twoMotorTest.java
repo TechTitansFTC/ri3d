@@ -12,30 +12,47 @@ public class twoMotorTest extends LinearOpMode {
         DcMotor motor1 = hardwareMap.get(DcMotor.class, "motor1");
         DcMotor motor2 = hardwareMap.get(DcMotor.class, "motor2");
 
+        double power1 = 0;
+        double power2 = 0;
+
         waitForStart();
 
         while (opModeIsActive()) {
 
             if (gamepad1.dpad_up) {
-                motor1.setPower(1);
-                motor2.setPower(1);
+                power1 = 1;
+                power2 = 1;
             }
             if (gamepad1.dpad_down) {
-                motor1.setPower(-1);
-                motor2.setPower(-1);
+                power1 = -1;
+                power2 = -1;
             }
             if (gamepad1.dpad_right) {
-                motor1.setPower(1);
-                motor2.setPower(-1);
+                power1 = 1;
+                power2 = -1;
             }
             if (gamepad1.dpad_left) {
-                motor1.setPower(-1);
-                motor2.setPower(1);
+                power1 = -1;
+                power2 = 1;
+            }
+            if (gamepad1.a) {
+                power1 -= 0.1;
+            }
+            if (gamepad1.b) {
+                power1 += 0.1;
+            }
+            if (gamepad1.x) {
+                power2 -= 0.1;
+            }
+            if (gamepad1.y) {
+                power2 += 0.1;
             }
             if (gamepad1.start) {
-                motor1.setPower(0);
-                motor2.setPower(0);
+                power1 = 0;
+                power2 = 0;
             }
+            motor1.setPower(power1);
+            motor2.setPower(power2);
 
             telemetry.addData("Motor 1 Power: ", motor1.getPower());
             telemetry.addData("Motor 2 Power: ", motor2.getPower());

@@ -38,7 +38,6 @@ public class teleop extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            // ---------- Adjustable shooter power ----------
             if (gamepad1.dpad_up && !dpadUpLast) {
                 shooterPower += 0.1;
                 if (shooterPower > 1.0) shooterPower = 1.0;
@@ -50,7 +49,6 @@ public class teleop extends LinearOpMode {
             dpadUpLast = gamepad1.dpad_up;
             dpadDownLast = gamepad1.dpad_down;
 
-            // ---------- Intake control ----------
             if (gamepad1.right_trigger > 0.1) {
                 intake.setPower(1.0);
             } else if (gamepad1.left_trigger > 0.1) {
@@ -59,9 +57,8 @@ public class teleop extends LinearOpMode {
                 intake.setPower(0.0);
             }
 
-            // ---------- Shooter control with adjustable power ----------
             if (gamepad1.y) {
-                shooterLeft.setPower(-shooterPower);
+                shooterLeft.setPower(shooterPower);
                 shooterRight.setPower(shooterPower);
             } else {
                 shooterLeft.setPower(0.0);

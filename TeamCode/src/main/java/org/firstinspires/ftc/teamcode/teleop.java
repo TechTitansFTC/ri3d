@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
@@ -32,6 +33,13 @@ public class teleop extends LinearOpMode {
         double shooterPower = 1.0;      // start full power
         boolean dpadUpLast = false;
         boolean dpadDownLast = false;
+        shooterLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        shooterRight.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        shooterRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        shooterLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
         waitForStart();
         if (isStopRequested()) return;
@@ -51,13 +59,13 @@ public class teleop extends LinearOpMode {
 
             if (gamepad1.right_trigger > 0.1) {
                 intake.setPower(1.0);
-            } else if (gamepad1.left_trigger > 0.1) {
+            } else if (gamepad1.right_bumper) {
                 intake.setPower(-1.0);
             } else {
                 intake.setPower(0.0);
             }
 
-            if (gamepad1.y) {
+            if (gamepad1.left_bumper) {
                 shooterLeft.setPower(shooterPower);
                 shooterRight.setPower(shooterPower);
             } else {
